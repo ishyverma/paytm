@@ -1,7 +1,7 @@
-import { Toaster, toast } from 'sonner'
+import { Toaster } from 'sonner'
 
 export default function Home() {
-  return <div className=''>
+  return <div className='bg-black'>
     <Toaster position='bottom-right' />
   </div>
 }
