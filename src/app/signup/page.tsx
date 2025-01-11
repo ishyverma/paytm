@@ -58,30 +58,32 @@ export default function Signup() {
           inputType="password"
           placeholder="••••••••"
         />
-        <Button
-          onClick={async () => {
-            setLoading(true);
-            try {
-              const response = await axios.post(
-                "http://localhost:3001/api/v1/user/signup",
-                {
-                  firstName,
-                  lastName,
-                  username,
-                  password,
+        <div className="mt-4">
+            <Button
+            onClick={async () => {
+                setLoading(true);
+                try {
+                const response = await axios.post(
+                    "http://localhost:3001/api/v1/user/signup",
+                    {
+                    firstName,
+                    lastName,
+                    username,
+                    password,
+                    }
+                );
+                toast.success(response.data.message);
+                setLoading(false);
+                router.push("/signin");
+                } catch (e: any) {
+                toast.error(e.response.data.message);
+                setLoading(false);
                 }
-              );
-              toast.success(response.data.message);
-              setLoading(false);
-              router.push("/signin");
-            } catch (e: any) {
-              toast.error(e.response.data.message);
-              setLoading(false);
-            }
-          }}
-          label={`${loading ? "" : "Sign up"}`}
-          icon={loading ? <Loading /> : <RightArrow />}
-        />
+            }}
+            label={`${loading ? "" : "Sign up"}`}
+            icon={loading ? <Loading /> : <RightArrow />}
+            />
+        </div>
         <div className="mt-4 flex justify-end text-sm">
           Already have an account?
           <span

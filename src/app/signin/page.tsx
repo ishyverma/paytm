@@ -37,29 +37,31 @@ export default function Signin() {
           inputType="password"
           placeholder="••••••••"
         />
-        <Button
-          onClick={async () => {
-            setLoading(true);
-            try {
-              const response = await axios.post(
-                "http://localhost:3001/api/v1/user/signin",
-                {
-                  username,
-                  password,
+        <div className="mt-4">
+            <Button
+            onClick={async () => {
+                setLoading(true);
+                try {
+                const response = await axios.post(
+                    "http://localhost:3001/api/v1/user/signin",
+                    {
+                    username,
+                    password,
+                    }
+                );
+                localStorage.setItem("token", response.data.token);
+                toast.success("Signed in successfully");
+                setLoading(false);
+                router.push("/dashboard");
+                } catch (e: any) {
+                toast.error(e.response.data.message);
+                setLoading(false);
                 }
-              );
-              localStorage.setItem("token", response.data.token);
-              toast.success("Signed in successfully");
-              setLoading(false);
-              router.push("/signin");
-            } catch (e: any) {
-              toast.error(e.response.data.message);
-              setLoading(false);
-            }
-          }}
-          label={`${loading ? "" : "Sign in"}`}
-          icon={loading ? <Loading /> : <RightArrow />}
-        />
+            }}
+            label={`${loading ? "" : "Sign in"}`}
+            icon={loading ? <Loading /> : <RightArrow />}
+            />
+        </div>
         <div className="mt-4 flex justify-end text-sm">
           Don't have an account?
           <span
