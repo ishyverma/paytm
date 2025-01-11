@@ -8,10 +8,16 @@ import SubHeading from "@/components/SubHeading";
 import { RightArrow } from "@/icons/RightArrow";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Toaster, toast } from "sonner";
 
 export default function Signup() {
+  useEffect(() => {
+    const token = localStorage.getItem("token")
+    if(token) {
+        window.location.href = "/dashboard"
+    }
+  }, [])
   const router = useRouter();
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
